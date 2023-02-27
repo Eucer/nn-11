@@ -67,7 +67,7 @@ def recommend_products(product_id):
     product_similarities = similarities[product_row.name]
 
     # Obtiene los índices de los productos más similares
-    closest_product_indices = product_similarities.argsort()[::-1][1:11]
+    closest_product_indices = product_similarities.argsort()[::-1][1:25]
 
     # Obtiene los nombres de los productos más similares
     closest_products = product_data.iloc[closest_product_indices]
