@@ -73,7 +73,7 @@ def products_to_json(products):
 
 
 # Función para recomendar productos similares
-def recommend_products(product_id):
+def recommend_products(product_id, limit=25):
     # Obtiene la fila del producto de entrada
     product_row = product_data[product_data['dui'] == product_id].iloc[0]
 
@@ -81,7 +81,7 @@ def recommend_products(product_id):
     product_similarities = similarities[product_row.name]
 
     # Obtiene los índices de los productos más similares
-    closest_product_indices = product_similarities.argsort()[::-1][1:25]
+    closest_product_indices = product_similarities.argsort()[::-1][1:(limit + 1)] # Limiting the number of results
 
     # Obtiene los nombres de los productos más similares
     closest_products = product_data.iloc[closest_product_indices]
@@ -99,9 +99,8 @@ async def read_root():
 
 # Definir la ruta para la recomendación de productos similares
 @app.get("/recommend_products/{product_id}")
-def get_recommendations(product_id: str):
-    recommendations = recommend_products(product_id)
+def get_recommendations(product_id: str, limit: int = 25): # Here, 'limit' is an optional query parameter
+    recommendations = recommend_products(product_id, limit)
     return recommendations
-
 
 
