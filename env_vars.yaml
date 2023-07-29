@@ -1,0 +1,2 @@
+env_variables:
+  DATABASE_URL: 'mongodb+srv://germys:LWBVI45dp8jAIywv@douvery.0oma0vw.mongodb.net/Production'
